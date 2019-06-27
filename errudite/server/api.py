@@ -550,6 +550,7 @@ class API(Registrable):
 
     def evaluate_rewrites_on_groups(self, rids: List[str], gnames: List[str], on_tried: bool=False):
         rids, gnames = convert_list(rids), convert_list(gnames)
+        print(rids, gnames)
         output = []
         for g in gnames:
             if not Group.exists(g):
@@ -576,11 +577,13 @@ class API(Registrable):
                 else:
                     delta_performance = []
                 counts = Rewrite.count_flips(delta_performance)
+                print(counts)
                 output.append({
                     'rid': rid,
                     'group': g,
                     'counts': counts
                 })
+        print(output)
         return output
 
 

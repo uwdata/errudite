@@ -32,7 +32,15 @@ class Store(object):
         -------
         Dict[str, T]
         """
-        return Store._store_hash[cls]
+        return Store._store_hash[cls._reset_name()]
+    
+
+    @classmethod
+    def _reset_name(cls):
+        if "Rewrite" in cls.__name__ or cls.__name__ in ["ReplacePattern", "ReplaceStr", "SemanticRule", ]:
+            return "Rewrite"
+        return cls.__name__
+
     @classmethod
     def keys(cls) -> Iterable[str]:
         """
@@ -43,7 +51,7 @@ class Store(object):
         Iterable[str]
             The generator of the keys
         """
-        return Store._store_hash[cls].keys()
+        return Store._store_hash[cls._reset_name()].keys()
     @classmethod
     def values(cls) -> Iterable[T]:
         """
@@ -54,7 +62,7 @@ class Store(object):
         Iterable[T]
             The generator of the values
         """
-        return Store._store_hash[cls].values()
+        return Store._store_hash[cls._reset_name()].values()
     @classmethod
     def items(cls) -> Iterable[Tuple[str, T]]:
         """
@@ -66,7 +74,7 @@ class Store(object):
         Iterable[Tuple[str, T]]
             The generator of the tuples of keys and values.
         """
-        return Store._store_hash[cls].items()
+        return Store._store_hash[cls._reset_name()].items()
     @classmethod
     def get(cls, name: str) -> T:
         """Get the stored object by querying its name.
@@ -81,9 +89,9 @@ class Store(object):
         T
             The queried object.
         """
-        if name not in Store._store_hash[cls]:
-            raise ConfigurationError("%s is not in the store of %s" % (name, cls.__name__))
-        return Store._store_hash[cls].get(name)
+        if name not in Store._store_hash[cls._reset_name()]:
+            raise ConfigurationError("%s is not in the store of %s" % (name, cls._reset_name()))
+        return Store._store_hash[cls._reset_name()].get(name)
     @classmethod
     def exists(cls, name: str) -> bool:
         """
@@ -99,7 +107,7 @@ class Store(object):
         bool
             If the instance exists.
         """
-        return name is not None and name in Store._store_hash[cls]
+        return name is not None and name in Store._store_hash[cls._reset_name()]
 
     @classmethod
     def create_from_json(cls, raw: Dict[str, Any]) -> T:
@@ -141,7 +149,7 @@ class Store(object):
         """
         try:
             if not file_name:
-                raise(ConfigurationError(f"import_from_file [ {cls.__name__} ]: No file given."))
+                raise(ConfigurationError(f"import_from_file [ {cls._reset_name()} ]: No file given."))
             if not file_name.endswith('.json'):
                 file_name += '.json'
             raws = load_json(os.path.join(CACHE_FOLDERS["analysis"], file_name))
@@ -195,12 +203,12 @@ class Store(object):
             Whether or not the export is successful.
         """
         name = getattr(obj, "name", None) or getattr(obj, "rid", None)
-        if name in Store._store_hash[cls]:
+        if name in Store._store_hash[cls._reset_name()]:
             message = "Storing %s in %s: Overwritting name already in use." % (
-                name, cls.__name__)
+                name, cls._reset_name())
                 #raise ConfigurationError(message)
             logger.warning(message)
-        Store._store_hash[cls][name] = obj
+        Store._store_hash[cls._reset_name()][name] = obj
         return True
 
     @classmethod
@@ -219,11 +227,11 @@ class Store(object):
         """
         try:
             if cls.exists(name):
-                del Store._store_hash[cls][name]
-                logger.info(f'Removed {cls.__name__}: {name}.')
+                del Store._store_hash[cls._reset_name()][name]
+                logger.info(f'Removed {cls._reset_name()}: {name}.')
                 return True
             else:
-                raise(ConfigurationError(f'Not existing {cls.__name__}: {name}.'))
+                raise(ConfigurationError(f'Not existing {cls._reset_name()}: {name}.'))
             return False
         except:
             raise

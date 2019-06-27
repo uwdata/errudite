@@ -64,7 +64,7 @@ class ListConverter(BaseConverter):
     @classmethod
     def to_python(self, value):
         try:
-            value = value.strip()
+            #value = value.strip()
             if value == "None" or value == "null":
                 return None
             elif value == "":
@@ -80,7 +80,7 @@ class IntListConverter(ListConverter):
     @classmethod
     def to_python(self, value):
         try:
-            value = value.strip()
+            #value = value.strip()
             if value == "None" or value == "null":
                 return None
             elif value == "":

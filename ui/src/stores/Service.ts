@@ -87,6 +87,7 @@ export class Service {
     }
 
     private _buildUrl(...params:any[]): string {
+        store._.validFetchMsg = '';
         store._.loadingData = 'pending';
         function unify(param) {
             if (param === null || param === undefined || `${param}` === "") {

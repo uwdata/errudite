@@ -157,6 +157,7 @@ export class RewriteInspectPanel extends React.Component<RewriteInspectProps, {}
 
 
     public renderPreviewGroups(rewrite: RewriteRule): JSX.Element {
+        console.log(this.previewdGroupRewrites);
         const list = this.previewdGroupRewrites
             .filter(d => d.rid === rewrite.rid)
             .map((d) => {

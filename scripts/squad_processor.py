@@ -20,8 +20,7 @@ if __name__ == "__main__":
     sample_size = 10570
     DATASET_FOLDER = normalize_file_path("~/datasets/raw_data/squad/")
     MODEL_FOLDER = normalize_file_path("~/datasets/models/bidaf/")
-    reader = DatasetReader.by_name("squad")(
-        cache_folder_path=f"~/datasets/caches/error_analysis/squad-{sample_size}")
+    reader = DatasetReader.by_name("squad")(cache_folder_path=f"~/datasets/caches/error_analysis/squad-{sample_size}")
 
     instances = reader.read(
         os.path.join(DATASET_FOLDER, "dev-v1.1.json"),

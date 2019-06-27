@@ -191,7 +191,7 @@ export class StoreClass {
     }
 
     public resetFetchMsg(): void {
-        this.validFetchMsg = this.service.SUCCESS_MSG;
+        this.validFetchMsg = '';
     }
 
     public recordProcedure(): void {

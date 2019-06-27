@@ -100,6 +100,7 @@ export class RewriteManager extends React.Component<{
             this.previewdGroupRewrites = data;
             this.displayModal = rewrite.hash();
         }
+        store._.loadingData = "done";
     }
 
     @action private toggleShowPercent(): void {
@@ -228,7 +229,7 @@ export class RewriteManager extends React.Component<{
                     shape='circle' icon='upload' size='small' className='info-button'
                     onClick={ () => { this.loadRewriteToBrowser(rewrite);} }/></Tooltip>
                 <Tooltip title="Apply rewrites to certain groups"><Button 
-                    shape='circle' icon='rewrite' size='small' className='info-button'
+                    shape='circle' icon='edit' size='small' className='info-button'
                     onClick={() => { this.loadRewriteRuleInfo(rewrite) }}/></Tooltip>
                 <Tooltip title="Delete the group"><Button 
                     shape='circle' icon='delete' size='small' className='info-button'

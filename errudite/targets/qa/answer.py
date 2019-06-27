@@ -80,6 +80,8 @@ class QAAnswer(Answer):
         for token in context.doc:
             if token.idx == char_start:
                 return token.i
+            elif token.idx < char_start:
+                span_offset += 1
         return span_offset
 
     def set_source_info(self, context: Context, char_start: int=None, span_start: int=None) -> None:

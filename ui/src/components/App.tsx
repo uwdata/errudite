@@ -49,9 +49,10 @@ export class App extends React.Component<{}, {}> {
     private renderFetchMsg(): void {
         message.config({ maxCount: 1 });
           
-        if (!store._.isValidFetch()) {
+        if (store._.validFetchMsg === ""){}
+        else if (!store._.isValidFetch()) {
             message.error(store._.validFetchMsg);
-        } else {
+        } else if (store._.isValidFetch()) {
             message.success(store._.validFetchMsg);
         }
     }

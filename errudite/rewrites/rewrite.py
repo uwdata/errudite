@@ -4,7 +4,7 @@ import numpy as np
 import altair as alt
 import pandas as pd
 from spacy.tokens import Span, Doc
-from typing import List, Dict, Callable
+from typing import List, Dict, Callable, TypeVar
 from collections import defaultdict
 from ..processor import spacy_annotator
 from ..utils import Registrable, Store, convert_doc, load_json, dump_json, CACHE_FOLDERS, normalize_file_path
@@ -15,6 +15,10 @@ from ..build_blocks.wrapper import BuildBlockWrapper
 
 import logging
 logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
+
+
+T = TypeVar('T')
+
 
 class Rewrite(Registrable, Store):
     """The base class for rewrite rules.
@@ -680,13 +684,13 @@ class Rewrite(Registrable, Store):
             If the removal is successful.
         """
         try:
-            if cls.exists(name):
-                rewrite = cls.get(name)
+            if Rewrite.exists(name):
+                rewrite = Rewrite.get(name)
                 if rewrite.__class__.__name__ == "SemanticRule":
                     rewrite._clear_rule()
                 for key in rewrite.get_instances():
                     Instance.remove_saved(key)
-                cls._remove_by_name(name)
+                Rewrite._remove_by_name(name)
                 return True
             return False
         except Exception as e:
