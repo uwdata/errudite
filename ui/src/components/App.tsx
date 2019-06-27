@@ -51,6 +51,8 @@ export class App extends React.Component<{}, {}> {
           
         if (!store._.isValidFetch()) {
             message.error(store._.validFetchMsg);
+        } else {
+            message.success(store._.validFetchMsg);
         }
     }
 

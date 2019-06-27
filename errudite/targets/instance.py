@@ -101,7 +101,7 @@ class Instance(object):
         """
         return InstanceKey(qid=self.qid, vid=self.vid)
     
-    def get_perform(self, model: str=None, perform_name=Label.task_primary_metric) -> float:
+    def get_perform(self, model: str=None, perform_name: str=None) -> float:
         """
         Get the metric of a given model, based on a performance metric name.
         
@@ -117,6 +117,7 @@ class Instance(object):
         float
             The queried metric. If cannot find the prediction from the model, return 0.
         """
+        perform_name = Label.resolve_default_perform_name(perform_name)
         try:
             model = Instance.resolve_default_model(model)
             prediction = self.get_entry('prediction', model)

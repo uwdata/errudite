@@ -1,5 +1,7 @@
 from typing import Dict
 import traceback
+from ...utils.evaluator import qa_score
+from ...targets.label import Label
 
 from .predictor_qa import PredictorQA
 from ..predictor import Predictor
@@ -28,6 +30,7 @@ class PredictorBiDAF(PredictorQA, PredictorAllennlp, Predictor):
             model_online_path=model_online_path,
             description=description)
         PredictorQA.__init__(self, name, description, self.predictor)
+        Label.set_task_evaluator(qa_score, 'f1')
 
     def predict(self, qtext: str, ptext: str) -> Dict[str, float]:
         try:

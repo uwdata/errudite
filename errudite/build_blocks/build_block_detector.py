@@ -388,7 +388,7 @@ class BuildBlockDetectorQA(BuildBlockDetector):
         # get the offset span
         for direction in ['left', 'right']:
             other_dir = 'left' if direction == 'right' else 'right'
-            dir_cmd = self._wrap_cmd(f'abs(answer_offset_delta({pred_cmd}, direction="{direction}"))')
+            dir_cmd = self._wrap_cmd(f'abs_num(answer_offset_delta({pred_cmd}, direction="{direction}"))')
             other_dir_cmd = self._wrap_cmd(f'answer_offset_delta({pred_cmd}, direction="{other_dir}")')
             dir_val = Attribute('', '', dir_cmd).test_one_instance(
                 self.instance, Attribute.store_hash(), Group.store_hash())

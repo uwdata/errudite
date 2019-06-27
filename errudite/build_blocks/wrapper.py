@@ -144,7 +144,7 @@ class BuildBlockWrapper(object):
             return output_
         except DSLValueError as e:
             logger.error(e)
-            raise e
+            # raise e
         except Exception as e:
             #print(f'[is_digit]')
             #traceback.print_exc()

@@ -717,8 +717,8 @@ class API(Registrable):
         """
         prev_rewrite = self.get_selected_rewrite()
         self.set_selected_rewrite(sample_rewrite, False)
-        if sample_rewrite:
-            sample_rewrite = Instance.resolve_default_rewrite(sample_rewrite)
+        sample_rewrite = Instance.resolve_default_rewrite(sample_rewrite)
+        selected_predictor = Instance.resolve_default_model(selected_predictor)
         # get the same space
         try:
             # compute the filter
@@ -764,6 +764,7 @@ class API(Registrable):
             # get the instances for display
             if not qids_input:
                 if sample_method == 'rand':
+                    
                     if len(keys) > sample_size:
                         keys = random.sample(list(keys.keys()), sample_size)
                 elif selected_predictor and selected_predictor in self.predictors:
@@ -802,11 +803,9 @@ class API(Registrable):
                         is_best = 1 if sample_method == 'best' else -1
                         is_border = -1 if sample_method == 'borderline' else 1
                         keys = sorted(list(keys.keys()), key=lambda key: (
-                            is_best * Instance.get(key).get_perform(selected_predictor), 
-                            is_border * perform(
-                                perform_name="confidence",
-                                predictions=Instance.get(key).get_entry('predictions'), 
-                                model=selected_predictor)), reverse=True)
+                            is_best * Instance.get(key).get_perform(selected_predictor, Label.task_primary_metric), 
+                            is_border * Instance.get(key).get_perform(selected_predictor, "confidence")
+                        ), reverse=True)
                 # save the sampled keys, and re-init the cache idx
                 qids = []
                 for key in keys:

@@ -205,8 +205,8 @@ class Label(Target):
         None
         """
         
-        cls.task_evaluation_func = task_evaluation_func
-        cls.task_primary_metric = task_primary_metric
+        Label.task_evaluation_func = task_evaluation_func
+        Label.task_primary_metric = task_primary_metric
 
     @classmethod
     def task_evaluator(cls, 
@@ -226,11 +226,11 @@ class Label(Target):
             A dict of metrics: { metric_name: metric_score }
         """
         try:
-            if not cls.task_evaluation_func or len(cls.task_evaluation_func(pred, labels)) == 0:
+            if not Label.task_evaluation_func or len(Label.task_evaluation_func(pred, labels)) == 0:
                 print('Define the task evaluation function!')
                 return {}
             else:
-                return cls.task_evaluation_func(pred, labels)
+                return Label.task_evaluation_func(pred, labels)
         except Exception:
             print('[task_evaluator]')
             traceback.print_exc()
@@ -254,7 +254,7 @@ class Label(Target):
             The resolved model
         """
         if not perform_name or perform_name == 'DEFAULT':
-            return cls.task_primary_metric
+            return Label.task_primary_metric
         else:
             return perform_name
 

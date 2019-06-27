@@ -655,7 +655,6 @@ export class QAStoreClass extends StoreClass {
             a.span_start, a.span_end, a.doc, a.answer_type, a.perform));
         this.sampledInstances = queried.sampled_keys.map(
             k => new QAInstanceKey(k.qid, k.vid, k.rid, k.cid, k.aid));
-        console.log(this.sampledInstances);
     }
 
     /**

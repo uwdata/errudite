@@ -22,6 +22,7 @@ export class ExportPanel extends React.Component<ExportPanelProps, {}> {
 
     public async export(): Promise<void> {
         await store._.service.exportBuilt(this.name, this.props.type);
+        store._.loadingData = "done";
     }
 
     public render(): JSX.Element {
