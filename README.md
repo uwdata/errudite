@@ -9,7 +9,7 @@ and perform counterfactual analysis across all available validation data.
 ## Getting Started
 
 1. Watch [this video demo](https://youtu.be/Dil5i0AYyu8) that contains the highlights of Errudite's functions & use cases 
-2. Get set up quickly
+2. Get [set up](#getting-started) quickly
 3. Try Errudite's user interface on machine comprehension
 4. Try the tutorials on JupyterLab notebooks
 5. Read the documentation
