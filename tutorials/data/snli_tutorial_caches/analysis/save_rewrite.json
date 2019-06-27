@@ -1,0 +1,11 @@
+[
+    {
+        "rid": "CARDINAL NOUN VERB -> one NOUN VERB",
+        "category": "auto",
+        "from_cmd": "CARDINAL NOUN VERB",
+        "to_cmd": "one NOUN VERB",
+        "description": "Change one pattern to another.",
+        "target_cmd": "premise",
+        "class": "ReplacePattern"
+    }
+]

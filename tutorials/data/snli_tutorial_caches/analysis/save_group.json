@@ -1,0 +1,12 @@
+[
+    {
+        "cmd": "abs_num(attr:delta_len_premise_hypo) > 5",
+        "name": "large_diff_length",
+        "description": "The input length is very different."
+    },
+    {
+        "cmd": "def large_diff_length_func(instance, **kwargs):\n    premise = instance.get_entry('premise')\n    hypothesis = instance.get_entry('hypothesis')\n    if premise and hypothesis:\n        delta_length = len(premise.doc) - len(hypothesis.doc)\n        return abs(delta_length) > 5 \n    return False\n",
+        "name": "large_diff_length_from_func",
+        "description": "The input length is very different."
+    }
+]

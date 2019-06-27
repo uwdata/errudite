@@ -1,0 +1,7 @@
+[
+    {
+        "cmd": "delta_length(premise, hypothesis)",
+        "name": "delta_len_premise_hypo",
+        "description": "The length delta between the premise and the hypothesis"
+    }
+]

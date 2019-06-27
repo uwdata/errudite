@@ -1,0 +1,2 @@
+from .predictor_decompose_att import PredictorDecomposeAtt
+from .predictor_nli import PredictorNLI
