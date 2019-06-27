@@ -51,7 +51,6 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.autosummary',
     'sphinx.ext.coverage',
-    'numpydoc'
 ]
 
 # The master toctree document.
