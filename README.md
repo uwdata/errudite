@@ -1,5 +1,7 @@
 # Errudite
 
+**This opensourcing is work-in-progress!**
+
 Errudite is an interactive tool for scalable, reproducible, and counterfactual error analysis. 
 Errudite provides an expressive domain-specific language for extracting relevant features of
 linguistic data, which allows users to visualize data attributes, group relevant instances,
@@ -32,7 +34,7 @@ and consider citing our work:
 
 ### Installation
 
-#### PIP
+#### PIP [TO COME: We will push it once it's stable!]
 Errudite requires Python 3.6.x. The package is avaiable through `pip`: 
 Just install it in your Python environment and you're good to go!
 
