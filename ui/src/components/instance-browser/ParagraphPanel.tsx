@@ -33,7 +33,7 @@ export class ContextPanel extends React.Component<ContextProps, {}> {
     // view related
     private viewType: string;
     // imported from the upper view
-    private editable: boolean;
+    private rewriteable: boolean;
     private qid: string;
     private selectedAnswer: QAAnswer;
     private ptokens: Token[];
@@ -50,7 +50,7 @@ export class ContextPanel extends React.Component<ContextProps, {}> {
         super(props, context);
         this.viewType = 'ppanel';
         this.qid = this.props.qid;
-        this.editable = this.props.rewriteable;
+        this.rewriteable = this.props.rewriteable;
 
         this.ptokens = this.props.ptokens;
         this.editHandler = this.props.rewriteHandler;
@@ -104,7 +104,7 @@ export class ContextPanel extends React.Component<ContextProps, {}> {
         const curClass = utils.genClass(this.viewType, 'psentence', [this.qid, sid]);
         return <div key={curClass.key}>{sentenceGroups[sid].map((t: Token, idx: number) => {
             // generate the current class for the token
-            const editClass = `token-edit-${t.etype}`;
+            const editClass = `token-rewrite-${t.etype}`;
             const curClass = utils.genClass(this.viewType, 'ptoken', 
                 [this.qid, utils.genStrId(t.text), `${t.etype}`, t.idx]);
             let answerToken: string = '';
@@ -156,7 +156,7 @@ export class ContextPanel extends React.Component<ContextProps, {}> {
         }
         this.predictionCountColor.domain(d3.range(1, store._.selectedPredictors.length + 1))
         let msg: JSX.Element;
-        if (this.editable) {
+        if (this.rewriteable) {
             // this part will be an input box
             const elementClass = utils.genClass(this.viewType, 'pinput', this.qid);
             msg = <Input.TextArea rows={10}
