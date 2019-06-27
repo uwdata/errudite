@@ -104,3 +104,4 @@ venv.bak/
 .mypy_cache/
 publish.sh
 ui/node_modules
+settings.json

@@ -12,7 +12,7 @@ and perform counterfactual analysis across all available validation data.
 2. Get [set up](#installation) quickly
 3. Try [Errudite's user interface](#gui-server) on machine comprehension
 4. Try the [tutorials on JupyterLab notebooks](#jupyterLab-tutorial)
-5. Read the [documentation]()
+5. Read the [documentation](https://errudite.readthedocs.io/en/latest/)
 
 ## Citation
 If you are interested in this work, please see our 

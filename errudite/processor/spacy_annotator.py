@@ -131,9 +131,7 @@ class SpacyAnnotator(object):
         Returns:
             [bool] -- True if installed package, False if not.
         """
-        return True
         data_path = util.get_data_path()
-        return False
         if not data_path or not data_path.exists():
             raise IOError("Can't find spaCy data path: %s" % str(data_path))
         if name in set([d.name for d in data_path.iterdir()]):
