@@ -105,3 +105,4 @@ venv.bak/
 publish.sh
 ui/node_modules
 settings.json
+test_notebooks
