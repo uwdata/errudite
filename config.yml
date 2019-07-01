@@ -1,5 +1,5 @@
 task: qa # the task, should be "qa" and "vqa".
-cache_path: ~/datasets/caches/error_analysis/squad-10570/ # the cached folder.
+cache_path: ~/datasets/caches/error_analysis/squad-100/ # the cached folder.
 model_metas: # a model.
 - name: bidaf
   model_class: bidaf # an implemented model class

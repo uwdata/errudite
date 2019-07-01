@@ -1,4 +1,4 @@
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 __short_description__ = "NLP error analysis."
 __license__ = "BSD 3-Clause License"
 __author__ = "Tongshuang Wu"

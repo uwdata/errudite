@@ -34,7 +34,7 @@ and consider citing our work:
 
 ### Installation
 
-#### PIP [TO COME: We will push it once it's stable!]
+#### PIP
 Errudite requires Python 3.6.x. The package is avaiable through `pip`: 
 Just install it in your Python environment and you're good to go!
 
@@ -90,6 +90,9 @@ Commands:
 Then, we need to start the server: 
 
 ```sh
+# the model relies on Allennlp, so make sure you install that first.
+pip install allennlp==0.8.4
+source venv/bin/activate
 python -m errudite.server
 
 Commands:

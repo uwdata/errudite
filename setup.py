@@ -12,7 +12,6 @@ if __name__ == "__main__":
     # --- Automatically generate setup parameters ---
     # Your package name
     PKG_NAME = package.__name__
-
     # Your GitHub user name
     try:
         GITHUB_USERNAME = package.__github_username__
@@ -130,6 +129,7 @@ if __name__ == "__main__":
         name=PKG_NAME,
         description=SHORT_DESCRIPTION,
         long_description=LONG_DESCRIPTION,
+        long_description_content_type="text/markdown",
         version=VERSION,
         author=AUTHOR,
         author_email=AUTHOR_EMAIL,
