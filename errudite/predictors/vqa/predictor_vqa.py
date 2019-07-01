@@ -6,7 +6,7 @@ from ...targets.vqa.answer import VQAAnswer
 class PredictorVQA(Predictor):
     """
     Predictor wrapper for visual question answering tasks.
-    * perform metrics: ['accuracy', 'confidence']
+    Perform metrics: ``['accuracy', 'confidence']``
     """
     def __init__(self, name: str, description: str, model: any):
         perform_metrics = ['accuracy', 'confidence']

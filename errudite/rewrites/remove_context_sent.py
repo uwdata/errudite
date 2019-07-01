@@ -10,6 +10,12 @@ class RemoveContextSentence (Rewrite):
     """
     Implemented for machine comprehension.
     Delete all the sentences in the paragraph except for the one containing the first groundtruth.
+
+    .. code-block:: python
+
+        from errudite.rewrites import Rewrite
+        Rewrite.by_name("RemoveContextSentence")
+
     """
     def __init__(self, 
         rid: str='keep_correct_sentence', # name the hypothesis

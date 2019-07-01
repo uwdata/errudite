@@ -8,7 +8,7 @@ from ..utils.check import DSLValueError
 class PrimFunc(Registrable):
     """
     A wrapper function primitive functions used in the domain specific language.
-    It inherits `errudite.utils.registrable`_, so all the functions can be 
+    It inherits ``errudite.utils.registrable``, so all the functions can be 
     registered to this class with their function names.
     """
     def __init__(self):

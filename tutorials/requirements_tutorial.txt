@@ -1,2 +1,2 @@
-jupyterlab==0.35.4
+jupyterlab==1.0.0a3
 allennlp==0.8.4

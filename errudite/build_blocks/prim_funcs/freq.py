@@ -33,15 +33,6 @@ def freq(
     -------
     float
         [description]
-    
-    Raises
-    ------
-    DSLValueError
-        [description]
-    DSLValueError
-        [description]
-    DSLValueError
-        [description]
     """
     output = 0
     try:

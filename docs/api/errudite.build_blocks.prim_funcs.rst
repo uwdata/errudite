@@ -1,4 +1,4 @@
-Pre-implemented Prim Functions
+Pre-implemented prim functions
 ==============================
 
 Errudite has a list of functions to support computing instance attributes and/or build instance groups. 
@@ -7,7 +7,7 @@ fundamental instance metadata (e.g., `length(q)` returns the length of a questio
 These include:
 
 * basic extractors like length, 
-* general purpose linguistic features like token ``LEMMA``, ``POS`` tags, and entity (``ENT``) annotations, 
+* general purpose linguistic features like token ``LEMMA``, ``POS`` tags, and entity (``ENT_TYPE``) annotations, 
 * standard prediction performance metrics such as ``f1`` or ``accuracy``,
 * between-target relations such as ``overlap(t1, t2)``, and 
 * domain-specific attributes (e.g., for Machine Comprehension or VQA) such as ``question_type`` and ``answer_type``. 
@@ -25,8 +25,8 @@ the model that generated it. When additional metadata is not used, ``Target`` ca
 
 .. py:function:: question|context|groundtruth → Target
 
-Automatically query the target object (Question and Answer in VQA and MC, 
-as well as Context in Machine comprehension). This can be easily extended to
+Automatically query the target object (``Question`` and ``Answer`` in Visual Question Answering 
+and Machine Comprehension, as well as ``Context`` in Machine comprehension). This can be easily extended to
 any key that is in ``Instance.instance_entries``.
 
 .. automodule:: errudite.build_blocks.prim_funcs.get_prediction
@@ -43,7 +43,7 @@ any key that is in ``Instance.instance_entries``.
    :members:
    :undoc-members:
 
-General Computation
+General computation
 -------------------
 
 .. automodule:: errudite.build_blocks.prim_funcs.digits
@@ -76,7 +76,7 @@ General Computation
 
 
 
-Linguistic Attributes
+Linguistic attributes
 ---------------------
 
 .. automodule:: errudite.build_blocks.prim_funcs.linguistic
@@ -98,7 +98,7 @@ Performance Metrics
 
 
 
-Between-target Relations
+Between-target relations
 ------------------------
 
 .. automodule:: errudite.build_blocks.prim_funcs.overlap
@@ -106,7 +106,7 @@ Between-target Relations
    :no-undoc-members:
 
 
-Domain-Specific Attributes
+Domain-specific attributes
 --------------------------
 
 .. automodule:: errudite.build_blocks.prim_funcs.dep_distance

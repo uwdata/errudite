@@ -8,11 +8,11 @@ from ...targets.qa.answer import QAAnswer
 class PredictorQA(Predictor):
     """
     Predictor wrapper for question answering/machine comprehension tasks.
-    * perform metrics: ['f1', 'em', 'sent', 'precision', 'recall', 'confidence']
+    Perform metrics: ``['f1', 'em', 'sent', 'precision', 'recall', 'confidence']``
 
     This can be queried via:
     
-    .. code-block:: js
+    .. code-block:: python
 
         from errudite.predictors import Predictor
         Predictor.by_name("qa_task_class")

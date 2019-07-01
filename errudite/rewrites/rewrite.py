@@ -599,6 +599,7 @@ class Rewrite(Registrable, Store):
         -------
         Dict[str, float]
             .. code-block:: js
+            
                 {
                     'flip_to_correct': a counting number,
                     'flip_to_incorrect': a counting number,

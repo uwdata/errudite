@@ -20,9 +20,9 @@ in natural language processing tasks. Errudite is designed following three princ
 Abstract Data Classes
 ---------------------
 
-As the basis for extending Errudite to other tasks and predictors, we use two abstract class to:
+As the basis for extending Errudite to other tasks and predictors, we use two abstract classes to:
 
-* ``register``customized classes or functions via ``Registrable``, so we could add our own code without extensively 
+* ``register`` the customized classes or functions via ``Registrable``, so we could add our own code without extensively 
   touching the source folder.
 * ``store`` the objects in a hash variable via ``Store``, so all the created instances and analyses can be easily queried
   and used in various functions.
@@ -32,7 +32,7 @@ As the basis for extending Errudite to other tasks and predictors, we use two ab
    
    api/_basic_structural_design
 
-Data Structure design
+Data Structure Design
 ---------------------
 
 Regardless of the task, raw data are transferred into ``Instance`` s, which
@@ -43,19 +43,19 @@ datasets like SQAuD), an instance will have ``Question``,
 ``Context``, ``Groundtruths``, and ``Predictions``. 
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
    api/_targets_and_instances
 
 **We provide some preprocessed cache folders downloading**:
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
    api/_download_preprocess
 
 
-Main analysis methods
+Main Analysis Methods
 ---------------------
 
 At the core of Errudite is an expressive domain-specific language (DSL) for precisely querying 
@@ -64,14 +64,14 @@ Errudite supports forming semantically meaningful groups and rewriting instances
 counterfactuals across all available validation data.
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
    api/_dsl
    api/_attrs_and_groups
    api/_rewrite_rule
 
-Extension
----------
+Extending Errudite 
+------------------
 
 To extend Errudite to your own task and model, you will need to write your own ``DatasetReader``, 
 and your own ``Predictor`` wrapper. A ``DatasetReader`` knows how to turn a file containing a 
@@ -97,7 +97,7 @@ Acknowledgements
 ----------------
 1. The design and implementation of Errudite is inspired by `Allennlp <http://Allennlp.org>`_.
 2. We use `SpaCy <https://spacy.io>`_ as the underlying preprocessing.
-3. We use `Altair <http://altair-viz.github.io>`_. for visualizing attributes, groups, and rewrites.
+3. We use `Altair <http://altair-viz.github.io>`_ for visualizing attributes, groups, and rewrites.
 
 Indices and tables
 ==================

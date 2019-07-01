@@ -13,6 +13,13 @@ from ..utils import str_to_func, func_to_str
 class RewriteCustomFunc (Rewrite):
     """
     A rewrite class that allows customized rewrite functions.
+
+    This can be queried via:
+    
+    .. code-block:: python
+
+        from errudite.rewrites import Rewrite
+        Rewrite.by_name("RewriteCustomFunc")
         
     Parameters
     ----------

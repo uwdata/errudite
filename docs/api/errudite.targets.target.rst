@@ -1,5 +1,5 @@
-errudite.targets.target.Target
-==============================
+errudite.targets.target
+=======================
 
 Targets are primitives which allow users to access inputs and 
 outputs at different levels of granularity, such as the ``question (q)``, 

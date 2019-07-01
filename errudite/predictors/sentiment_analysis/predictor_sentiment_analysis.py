@@ -8,11 +8,11 @@ import torch
 class PredictorSA(Predictor):
     """
     Predictor wrapper for sentiment analysis tasks.
-    * perform metrics: ['accuracy', 'confidence']
+    Perform metrics: ``['accuracy', 'confidence']``
 
     This can be queried via:
     
-    .. code-block:: js
+    .. code-block:: python
 
         from errudite.predictors import Predictor
         Predictor.by_name("sentiment_task_class")

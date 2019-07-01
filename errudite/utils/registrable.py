@@ -22,7 +22,7 @@ class Registrable(FromParams):
     Note that if you use this class to implement a new ``Registrable`` abstract class,
     you must ensure that all subclasses of the abstract class are loaded when the module is
     loaded, because the subclasses register themselves in their respective files. You can
-    achieve this by having the abstract class and all subclasses in the __init__.py of the
+    achieve this by having the abstract class and all subclasses in the ``__init__.py`` of the
     module in which they reside (as this causes any import of either the abstract class or
     a subclass to load all other subclasses and the abstract class).
     """

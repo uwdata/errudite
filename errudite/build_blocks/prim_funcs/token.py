@@ -132,8 +132,8 @@ def token(
         Used to filter and get the sub-list of spans in the doc span list.
         Pattern allows linguistic annotations and automatically detects queries 
         on POS tags and entity types, in ALL CAPS. For example,
-        ``(what, which) NOUN)`` may query all docs that have "what NOUN" or 
-        "which NOUN". If a list, then all the patterns in a list are "OR".
+        ``(what, which) NOUN)`` may query all docs that have ``what NOUN`` or 
+        ``which NOUN``. If a list, then all the patterns in a list are "OR".
         By default None
     
     Returns

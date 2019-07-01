@@ -23,7 +23,7 @@ class SQUADReader(DatasetReader):
 
     This can be queried via:
     
-    .. code-block:: js
+    .. code-block:: python
 
         from errudite.io import DatasetReader
         DatasetReader.by_name("squad")

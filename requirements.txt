@@ -1,5 +1,4 @@
 altair==3.0.0
-jupyterlab==1.0.0a3
 pandas==0.24.2
 overrides==1.9
 tqdm==4.31.1
@@ -11,4 +10,3 @@ pyyaml==5.1.1
 
 flask==1.0.3
 flask_cors==3.0.8
-allennlp==0.8.4

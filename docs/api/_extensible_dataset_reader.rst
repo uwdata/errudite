@@ -5,7 +5,7 @@ To extend Errudite to different tasks, We implement the dataset reader in a way 
 it can be extended to customized dataset handlers.
 
 All the predictors are defined under ``errudite.io.dataset_reader.DatasetReader``. 
-This is a subclass of `errudite.utils.registrable.Registrable` and all the actual reader 
+This is a subclass of ``errudite.utils.registrable.Registrable`` and all the actual reader 
 classes are registered under ``DatasetReader`` by their names. 
 
 .. toctree::
@@ -13,10 +13,8 @@ classes are registered under ``DatasetReader`` by their names.
 
 We have several defaul implementations for several different tasks, and for some 
 tasks, we also have some default, supporting predictor impelmentations (especially
-those from Allennlp.)
+those from ``Allennlp``.)
 
 .. toctree::
-   errudite.io.squad_reader
-   errudite.io.snli_reader
-   errudite.io.sst_reader
+   errudite.io.task_readers
 

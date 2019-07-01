@@ -6,7 +6,7 @@ class Predictor(Registrable):
     A predictor runs prediction on raw texts and also instances.
     It also saves the performance score for the predictor.
         
-    This is a subclass of `errudite.utils.registrable.Registrable` and all the actual rewrite 
+    This is a subclass of ``errudite.utils.registrable.Registrable`` and all the actual rewrite 
     rule classes are registered under ``Predictor`` by their names.
 
     Parameters
@@ -23,7 +23,9 @@ class Predictor(Registrable):
     Attributes
     ----------
     perform : Dict[str, float]
-        { perform_name: the averaged performance score. }
+        .. code-block:: js
+            
+            { perform_name: the averaged performance score. }
     """
     def __init__(self, 
         name: str, 
@@ -99,7 +101,7 @@ class Predictor(Registrable):
         return f'{self.__class__.__name__} {self.name}'
     
     @classmethod
-    def create_from_json(cls, raw):
+    def create_from_json(cls, raw: Dict[str, str]) -> 'Predictor':
         """
         Recreate the predictor from its seralized raw json.
         

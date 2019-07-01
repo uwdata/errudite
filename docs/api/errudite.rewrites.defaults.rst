@@ -1,4 +1,4 @@
-Default Rewrite rules
+Default rewrite rules
 =====================
 
 For convenience, Errudite also includes default rules.

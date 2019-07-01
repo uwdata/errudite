@@ -15,6 +15,11 @@ class ResolveCoref (Rewrite):
     """
     The rewrite rule that automatically resolve the coreferences in sentences.
     Needs to use `neuralcoref <https://github.com/huggingface/neuralcoref>`_.
+
+    .. code-block:: python
+
+        from errudite.rewrites import Rewrite
+        Rewrite.by_name("ResolveCoref")
     """
     def __init__(self, 
         rid: str='resolve_coref', # name the hypothesis

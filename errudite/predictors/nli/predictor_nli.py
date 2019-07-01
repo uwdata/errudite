@@ -7,11 +7,11 @@ from ...targets.label import Label, PredefinedLabel
 class PredictorNLI(Predictor):
     """
     Predictor wrapper for natural language inference tasks.
-    * perform metrics: ['accuracy', 'confidence']
+    perform metrics: ``['accuracy', 'confidence']``
 
     This can be queried via:
     
-    .. code-block:: js
+    .. code-block:: python
 
         from errudite.predictors import Predictor
         Predictor.by_name("nli_task_class")

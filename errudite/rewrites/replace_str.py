@@ -21,6 +21,11 @@ class ReplaceStr (Rewrite):
 
     An easier way might be to stick to ``ReplaceStr`` -- It detects whether the linguistic 
     patterns are used automatically. If not, it will automatically switch to  ``ReplaceStr``.
+
+    .. code-block:: python
+
+        from errudite.rewrites import Rewrite
+        Rewrite.by_name("ReplaceStr")
     
     Parameters
     ----------

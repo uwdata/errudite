@@ -15,7 +15,7 @@ class PredictorDecomposeAtt(PredictorNLI, PredictorAllennlp, Predictor):
 
     This can be queried via:
     
-    .. code-block:: js
+    .. code-block:: python
 
         from errudite.predictors import Predictor
         Predictor.by_name("snli")

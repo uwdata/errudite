@@ -10,6 +10,11 @@ class RemoveClue (Rewrite):
     """
     A rewrite rule that automatically remove part of the question string:
     It deletes subtrees of the sentence, with the dep being ``dep``.
+
+    .. code-block:: python
+
+        from errudite.rewrites import Rewrite
+        Rewrite.by_name("RemoveClue")
     """
     def __init__(self, 
         rid: str='remove_clues',

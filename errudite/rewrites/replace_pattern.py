@@ -32,6 +32,11 @@ class ReplacePattern (Rewrite):
     For example, you can input ``from_cmd="what NOUN"``, and ``to_cmd="which NOUN"``.
     If no linguistic annotation, this will automatically switch to  
     ``errudite.rewrites.replace_str.ReplaceStr``
+
+    .. code-block:: python
+
+        from errudite.rewrites import Rewrite
+        Rewrite.by_name("ReplacePattern")
         
     Parameters
     ----------
