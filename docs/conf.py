@@ -30,7 +30,7 @@ autodoc_mock_imports = [
 # -- Project information -----------------------------------------------------
 
 project = 'errudite'
-copyright = '2019, Tongshuang Wu'
+copyright = '2019, developers of Errudite'
 author = 'Tongshuang Wu'
 
 # The full version, including alpha/beta/rc tags
