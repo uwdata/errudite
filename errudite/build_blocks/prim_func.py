@@ -42,8 +42,9 @@ class PrimFunc(Registrable):
                 instance_data = instance.get_entry(param_name)
                 if instance_data is not None:
                     params[param_name] = instance_data
-                elif param.default is not param.empty:
-                    params[param_name] = param.default
+                # TODO: check if this is useful. 
+                #elif param.default is not param.empty:
+                #    params[param_name] = param.default
             return partial(func, **params)
         except:
             raise

@@ -126,7 +126,6 @@ def linguistic(
     output = None
     try:
         NOT_INCLUDE_POS = ['ADP', 'IN', 'RP', 'RB', 'DET', 'CONJ', 'PUNCT', 'CCONJ', 'PART', 'SCONJ', 'SYM']
-
         def linguistic_ent_(span):
             if not span:
                 return None
@@ -138,9 +137,13 @@ def linguistic(
                     span = span.root
                 else:
                     return None
-            if type(span) == Token and get_token_feature(span, 'ent'):
-                return get_token_feature(span, 'ent')
-            ents = [i.label_ for i in span.ents]
+            print(type(span))
+            if type(span) == Token:
+                if get_token_feature(span, 'ent'):
+                    return get_token_feature(span, 'ent')
+                else:
+                    return None
+            ents = [get_token_feature(i, 'ent') for i in span]
             if get_most_common:
                 count_arr = []
                 for ent in ents:

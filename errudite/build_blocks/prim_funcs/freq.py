@@ -47,7 +47,6 @@ def freq(
     try:
         if not Instance.train_freq:
             raise DSLValueError(f"No training data freq.")
-        print(target_type)
         if target_type not in Instance.train_freq:
             raise DSLValueError(f"No training data frequency for {target_type}.")
         def freq_(doc):

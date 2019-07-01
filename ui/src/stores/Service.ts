@@ -208,6 +208,7 @@ export class Service {
     }
 
     public async deleteBuilt(name: string, type: string): Promise<boolean> {
+        if (name === "") { return; }
         const url = this._buildUrl(`delete_built`, name, type);
         return await this. _fetchReturn<boolean>(url);
     }
@@ -311,6 +312,7 @@ export class Service {
      * @param {string} tids ids of editing templates used for augmentation  
      */
     public async deleteSelectedRules(rids: string[]): Promise<any> {
+        if (!rids || rids.length === 0) { return; }
         const url = this._buildUrl('delete_selected_rules', rids);
         return await this. _fetchReturn<any[]>(url);
     }

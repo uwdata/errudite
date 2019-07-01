@@ -23,31 +23,32 @@ def token_pattern(
         global CUR_SAVED_RULE
         if not pattern: # special case: just return everything
             output = docs
-        if not docs:
-            raise DSLValueError("No given doc to [ token_pattern ].")
-        docs = convert_list(convert_doc(docs, strict_format='doc'))
-        pattern = convert_list(pattern)
-        pattern_key = 'pattern' + '::'.join(pattern)
-        if pattern_key != CUR_SAVED_RULE:
-            # define a matcher only when it's not the same rule currently used.
-            patterns = merge_list([
-                parse_cmd(p).gen_pattern_list() for p in pattern])
-            if patterns:
-                if 'matcher' in matcher:
-                    matcher.remove('matcher')
-                matcher.add('matcher', None, *patterns)
-                CUR_SAVED_RULE = pattern_key
-        returned_spans = []
-        for doc in docs:
-            for _, start, end in matcher(doc):
-                returned_spans.append(doc[start:end])
-        if len(returned_spans) == 1:
-            output = returned_spans[0]
-        if not returned_spans:
-            pass
-            #raise DSLValueError(f"No match found for {pattern} in {docs}.")
         else:
-            output = returned_spans
+            if not docs:
+                raise DSLValueError("No given doc to [ token_pattern ].")
+            docs = convert_list(convert_doc(docs, strict_format='doc'))
+            pattern = convert_list(pattern)
+            pattern_key = 'pattern' + '::'.join(pattern)
+            if pattern_key != CUR_SAVED_RULE:
+                # define a matcher only when it's not the same rule currently used.
+                patterns = merge_list([
+                    parse_cmd(p).gen_pattern_list() for p in pattern])
+                if patterns:
+                    if 'matcher' in matcher:
+                        matcher.remove('matcher')
+                    matcher.add('matcher', None, *patterns)
+                    CUR_SAVED_RULE = pattern_key
+            returned_spans = []
+            for doc in docs:
+                for _, start, end in matcher(doc):
+                    returned_spans.append(doc[start:end])
+            if len(returned_spans) == 1:
+                output = returned_spans[0]
+            if not returned_spans:
+                pass
+                #raise DSLValueError(f"No match found for {pattern} in {docs}.")
+            else:
+                output = returned_spans
     except DSLValueError as e:
         #logger.error(e)
         raise(e)

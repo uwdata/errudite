@@ -185,7 +185,7 @@ class SemanticRule(ReplacePattern):
         for sample in samples:
             for rid, r_name in enumerate(rule_names):
                 input = rules[r_name]._get_target(sample)
-                output = rules[r_name].rewrite_target(sample)
+                output = rules[r_name]._rewrite_target(sample)
                 if not input or not output:
                     continue
                 text_pair = TextPairMeta(atext=input.text, btext=output)

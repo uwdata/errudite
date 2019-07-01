@@ -468,11 +468,14 @@ class SemanticRuleDetector(object):
         #for adoc, bdoc in pairs:                
         #if IS_DEBUGGING:
         #    self._print_queries(ops, aquery, bquery)
-        print(adoc, bdoc)
-        self.detect_rules_per_pair(adoc, bdoc, target_cmd)
-        if len(instances) <= sample_size:
-            samples = instances
-        else:
-            samples = random.sample(instances, sample_size)
-        rules = SemanticRule.filter_rules_via_sample_augment(self.rules, samples)
-        return rules
+        try:
+            print(adoc, bdoc)
+            self.detect_rules_per_pair(adoc, bdoc, target_cmd)
+            if len(instances) <= sample_size:
+                samples = instances
+            else:
+                samples = random.sample(instances, sample_size)
+            rules = SemanticRule.filter_rules_via_sample_augment(self.rules, samples)
+            return rules
+        except:
+            raise

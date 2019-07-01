@@ -285,7 +285,7 @@ class KwargOp(OpNode):
             else:
                 if rewrite_type in instance_group:
                     instance = instance_group[rewrite_type]
-                    if instance.get_entry(self.value) != None:
+                    if self.key != "target_type" and instance.get_entry(self.value) != None:
                         return OpNodeReturn(
                             key=[ instance.key() ],
                             value=(self.key, instance.get_entry(self.value)))

@@ -223,7 +223,7 @@ const SHARED_FUNCS = [
         type: "snippet", 
         meta: "attr-func", 
         score: 1000,
-        snippet: "freq (${1:target}, ${2:target_type})"
+        snippet: 'freq (${1:target}, ${2:target_type="question"})'
     }, {
         value: "truncate",
         caption: "truncate",
