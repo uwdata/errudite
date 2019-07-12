@@ -64,6 +64,10 @@ pip install --editable .
 This will make `errudite` available on your system but it will use the sources from the local clone
 you made of the source repository.
 
+#### 
+1. `mysql_config not found` for `Pattern`: See similar solutions [here](https://github.com/PyMySQL/mysqlclient-python#prerequisites).
+
+
 ### GUI Server
 
 Errudite has a UI wrapped for Machine Comprehension and Visual Question Answering tasks.
