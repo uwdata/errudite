@@ -143,6 +143,6 @@ pip install --editable .
 
 # get to the tutorial folder, and start!
 cd tutorials
-pip install -r requirements_tutorials.txt
+pip install -r requirements_tutorial.txt
 jupyter lab
 ```
