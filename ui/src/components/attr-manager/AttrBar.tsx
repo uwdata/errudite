@@ -508,6 +508,7 @@ export class AttrBar extends React.Component<AttrPreviewProps, {}> {
             rewrite: { dark: d3.schemePaired[2], light: d3.schemePaired[2] }
         }
         let highlights_ = await store._.service.getOneAttrOfInstances(this.props.attr.name, instances);
+        store._.loadingData = "done";
         highlights_ = highlights_ === null ? [] : highlights_;
         highlights_ = highlights_.filter(h => h !== null);
         const highlights = highlights_.map((v: AttrValue, idx: number) => {
