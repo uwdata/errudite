@@ -124,7 +124,7 @@ class DatasetReader(Registrable):
         target_dicts = self._read(file_path, lazy=True, sample_size=None)
         for key, val in target_dicts.items():
             logger.info(f"Computing {key} frequency.")
-            Instance.train_freq[key] = _count_str_freq(val)
+            Instance.train_freq[f'{key}_vocab'] = _count_str_freq(val)
 
     def _text_to_instance(self, *inputs) -> Instance:
         raise NotImplementedError

@@ -77,8 +77,8 @@ class PredictorQA(Predictor):
         if context:
             answer.set_source_info(
                 context, 
-                char_start=predicted['char_start'] if "char_start" in predicted or None, 
-                span_start=predicted['span_start'] if "span_start" in predicted or None)
+                char_start=predicted['char_start'] if "char_start" in predicted else None, 
+                span_start=predicted['span_start'] if "span_start" in predicted else None)
         if groundtruths:
             answer.compute_perform(groundtruths=groundtruths)
         if predicted:

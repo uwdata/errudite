@@ -1,5 +1,6 @@
 from ..target import Target
 from ...processor.ling_consts import WHs
+from typing import Dict
 
 class Question(Target):
     """initialize a question instance.
@@ -17,8 +18,14 @@ class Question(Target):
             None -- [description]
         """
     
-    def __init__(self, qid: str, text: str, vid: int=0, annotator=None, question_type: str=None) -> None:
-        Target.__init__(self, qid, text, vid, annotator)
+    def __init__(self, 
+        qid: str, 
+        text: str, 
+        vid: int=0,
+        annotator=None, 
+        question_type: str=None,
+        metas: Dict[str, any]={}) -> None:
+        Target.__init__(self, qid, text, vid, annotator=annotator, metas=metas)
         self.question_type = question_type if question_type else self.get_question_type()
 
     def get_question_type(self) -> str:

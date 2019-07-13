@@ -13,23 +13,38 @@ class ContextKey(NamedTuple):
     qid: str=None
 
 class Context(Target):
-    """Paragraph instance class
-        
-    Arguments:
-        aid {int} -- article id
-        cid {int} -- context id
-        text {str} -- the paragraph context
-        
-    Keyword Arguments:
-        vid {int} -- version id, default to 0 (default: {0})
-        qid {str} -- question id, if the context is modified based on a specific question (default: {None})
-    
-    Returns:
-        None -- [description]
+    """
+    A batch of Instances. In addition to containing the instances themselves,
+    it contains helper functions for converting the data into tensors.
+
+    Parameters
+    ----------
+    aid : int
+        article id.
+    cid : int
+        context id
+    text : str
+        The raw text will be processed with SpaCy.
+    vid : int, optional
+        The version, by default 0. When an instance/a target is rewritten, the version 
+        will automatically grow.
+    qid : str
+        question id, if the context is modified based on a specific question. by default None.
+    annotator : SpacyAnnotator, optional
+        The annotator, by default None. If None, use the default annotator.
+    metas : Dict[str, any], optional
+        Additional metas associated with a target, in the format of {key: value}, by default {}
     """
 
-    def __init__(self, aid: int, cid: int, text: str, vid: int = 0, qid: str = None, annotator=None) -> None:
-        Target.__init__(self, qid, text, vid, annotator)
+    def __init__(self, 
+        aid: int, 
+        cid: int, 
+        text: str, 
+        vid: int = 0, 
+        qid: str = None, 
+        annotator=None, 
+        metas: Dict[str, any]={}) -> None:
+        Target.__init__(self, qid, text, vid, annotator=annotator, metas=metas)
         self.aid: int = aid
         self.cid: int = cid
 

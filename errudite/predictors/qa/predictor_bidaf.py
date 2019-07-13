@@ -7,6 +7,9 @@ from .predictor_qa import PredictorQA
 from ..predictor import Predictor
 from ..predictor_allennlp import PredictorAllennlp
 
+import logging
+logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
+
 @Predictor.register("bidaf")
 class PredictorBiDAF(PredictorQA, PredictorAllennlp, Predictor):
     """
@@ -42,6 +45,5 @@ class PredictorBiDAF(PredictorQA, PredictorAllennlp, Predictor):
                 'span_start': predicted['best_span'][0]
             }
         except Exception as e:
-            print('[get_img]')
-            traceback.print_exc()
+            logger.error(e)
             return None
