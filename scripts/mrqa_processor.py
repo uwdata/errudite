@@ -1,4 +1,10 @@
 import glob, os
+import sys
+sys.path.append('..')
+sys.path.append('../..')
+sys.path.append(os.path.abspath(os.path.expanduser('~/Desktop/sourcetree/errudite/')))
+
+
 import pandas as pd
 from tqdm import tqdm
 import errudite
@@ -7,7 +13,6 @@ from errudite.predictors import Predictor
 from errudite.targets.instance import Instance
 from errudite.targets.label import Label
 from errudite.utils import accuracy_score, normalize_file_path
-
 
 import logging
 logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
