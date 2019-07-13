@@ -52,7 +52,7 @@ if __name__ == "__main__":
     Instance.build_instance_hashes(instances)
 
     TRAIN_DATASET_FOLDER = normalize_file_path("~/datasets/raw_data/mrqa/trains")
-    file_path = ",".join(glob.glob(os.path.join(DATASET_FOLDER, "*.jsonl.gz")))
+    file_path = ",".join(glob.glob(os.path.join(TRAIN_DATASET_FOLDER, "*.jsonl.gz")))
     reader.count_vocab_freq(file_path)
     reader.compute_ling_perform_dict(list(Instance.instance_hash.values()))
     reader.dump_preprocessed()
