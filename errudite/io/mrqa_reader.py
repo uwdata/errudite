@@ -53,10 +53,10 @@ class MRQAReader(DatasetReader):
         while not all(is_done):
             for ind, dataset in enumerate(datasets):
                 dataset_header = dataset["header"]
-                #logger.info(f"Reading from dataset: {dataset_header['dataset']}.")
+                logger.info(f"Reading from dataset: {dataset_header['dataset']}.")
                 if is_done[ind]:
                     continue
-                for cidx, example in enumerate(dataset['file_handle']):
+                for cidx, example in tqdm(enumerate(dataset['file_handle'])):
                     p_raw = json.loads(example)
                     cid = f'{dataset_header["dataset"]}_{cidx}'
                     if not p_raw['context']:
@@ -64,8 +64,7 @@ class MRQAReader(DatasetReader):
                     if lazy:
                         context = p_raw['context']
                     else:
-                        context = Context(
-                            aid="0", cid=cid, text=p_raw['context'], vid=0, 
+                        context = Context(aid="0", cid=cid, text=p_raw['context'], vid=0, 
                             qid=None, metas={"dataset": dataset_header["dataset"]})
                     # for each question
                     for q_raw in p_raw['qas']:
@@ -83,6 +82,9 @@ class MRQAReader(DatasetReader):
                                 break
                     if is_done[ind]:
                         break
+                else:
+                    # No more lines to be read from file
+                    is_done[ind] = True
         for dataset in datasets:
             #logger.info("Total number of processed questions for %s is %d",dataset['header']['dataset'], dataset['num_of_questions'])
             dataset['file_handle'].close()
