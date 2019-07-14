@@ -83,7 +83,7 @@ const LINGUISTICS = "LEMMA|POS|TAG|POS|ENT_TYPE|ENT|ORTH"
 const DEFINED_LOGICS = "has_any|has_all|count"
 export const FUNCTIONS_SHARE = [
     LINGUISTICS, DEFINED_LOGICS, 
-    "overlap|STRING|abs_num|prediction|length|freq|question_type|answer_type|starts_with|ends_with|is_rewritten_by|apply"].join("|");
+    "overlap|STRING|LABEL|abs_num|prediction|length|freq|question_type|answer_type|starts_with|ends_with|is_rewritten_by|apply|get_meta|get_antonym|get_synonym"].join("|");
 export const FUNC_PERFORM_QA = "f1|precision|recall|exact_match|is_correct_sent|confidence";
 export const FUNC_PERFORM_VQA = "accuracy|confidence";
 
@@ -125,6 +125,20 @@ const VQA_PERFORMANCES = FUNC_PERFORM_VQA.split('|').map(l => {
 
 const SHARED_FUNCS = [
     {
+        value: "digitize",
+        caption: "digitize",
+        type: "snippet", 
+        meta: "attr-func", 
+        score: 1000,
+        snippet: "digitize (${1:target})"
+    }, {
+        value: "is_digit",
+        caption: "is_digit",
+        type: "snippet", 
+        meta: "attr-func", 
+        score: 1000,
+        snippet: "is_digit (${1:target})"
+    }, {
         value: "apply",
         caption: "apply",
         type: "snippet", 
@@ -147,6 +161,13 @@ const SHARED_FUNCS = [
         meta: "attr-func", 
         score: 1000,
         snippet: 'STRING (${1:target})'
+    },{
+        value: "LABEL",
+        caption: "LABEL",
+        type: "snippet", 
+        meta: "attr-func",
+        score: 1000,
+        snippet: 'LABEL (${1:target})'
     },{
         value: "overlap",
         caption: "overlap",
@@ -231,7 +252,31 @@ const SHARED_FUNCS = [
         meta: "attr-func", 
         score: 1000,
         snippet: "truncate (${1:value}, ${2:min_value=-1}, ${3:max_value=50})"
-    }
+    },
+    {
+        value: "get_meta",
+        caption: "get_meta",
+        type: "snippet", 
+        meta: "attr-func", 
+        score: 1000,
+        snippet: 'get_meta (${1:target="question"}, ${2:meta_name="dataset"})'
+    },
+    {
+        value: "get_synonym",
+        caption: "get_synonym",
+        type: "snippet", 
+        meta: "attr-func", 
+        score: 1000,
+        snippet: 'get_synonym (${1:token})'
+    },
+    {
+        value: "get_antonym",
+        caption: "get_antonym",
+        type: "snippet", 
+        meta: "attr-func", 
+        score: 1000,
+        snippet: 'get_antonym (${1:token})'
+    },
 ];
 
 const QA_FUNCS = [
@@ -267,21 +312,6 @@ const QA_FUNCS = [
 ]
 
 const VQA_FUNCS = [
-    {
-        value: "digitize",
-        caption: "digitize",
-        type: "snippet", 
-        meta: "attr-func", 
-        score: 1000,
-        snippet: "digitize (${1:target})"
-    }, {
-        value: "is_digit",
-        caption: "is_digit",
-        type: "snippet", 
-        meta: "attr-func", 
-        score: 1000,
-        snippet: "is_digit (${1:target})"
-    }
 ]
 
 export class CustomHighlightRules extends ace.acequire(
