@@ -62,7 +62,8 @@ class PredictorBertMRQA(PredictorQA, PredictorAllennlp, Predictor):
                 return {
                     'confidence': predicted["best_span_logit"], #np.log2(predicted["best_span_logit"]),
                     'text': predicted["best_span_str"], #predicted['best_span_str'],
-                    'char_start': predicted['char_offsets'][0]
+                    # 5 chars for [SEP], 1 + 1 chars for spaces
+                    'char_start': predicted['char_offsets'][0] - len(qtext) - 7
                 }
             else:
                 return None

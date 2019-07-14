@@ -127,7 +127,6 @@ class BERT_QA(Model):
 
             passage_str = question_instances_metadata[best_span_ind]['original_passage']
             offsets = question_instances_metadata[best_span_ind]['token_offsets']
-
             predicted_span = best_span_cpu[question_inds[best_span_ind]]
             start_offset = offsets[predicted_span[0]][0]
             end_offset = offsets[predicted_span[1]][1]
