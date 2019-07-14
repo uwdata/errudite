@@ -83,12 +83,12 @@ skip the process of running your own preprocessing. Say we want to use the prepr
 and we want to download the preprocessed data folder to `~/caches/`:
 
 ```
-python -m errudite.download --cache_folder_name squad-10570 --cache_path ~/caches/
+python -m errudite.download --cache_folder_name mrqa-dev --cache_path ~/caches/
 
 Commands:
     cache_folder_name
                 A folder name. Currently, we allow downloading the following:
-                squad-100, squad-10570.
+                squad-100, squad-10570, mrqa-dev.
     cache_path  A local path where you want to save the cache folder to.
 ```
 
@@ -108,14 +108,14 @@ The config file looks like the following (or in [config.yml](config.yml)):
 
 ```yml
 task: qa # the task, should be "qa" and "vqa".
-cache_path:  ~/caches/squad-10570 # the cached folder: {cache_path}/{cache_folder_name}/
+cache_path:  ~/caches/mrqa-dev # the cached folder: {cache_path}/{cache_folder_name}/
 model_metas: # a model.
-- name: bidaf
-  model_class: bidaf # an implemented model class
-  model_path: # a local model file path
+- name: mrqa_path
+  model_class: mrqa # an implemented model class
+  model_path: 
   # an online path to an Allennlp model
-  model_online_path: https://s3-us-west-2.amazonaws.com/allennlp/models/bidaf-model-2017.09.15-charpad.tar.gz
-  description: Pretrained model from Allennlp, for the BiDAF model (QA)
+  model_online_path: https://s3.us-east-2.amazonaws.com/mrqa/models/BERT/_MIX_6.tar.gz
+  description: Pretrained BERT baseline model from MRQA website.
 attr_file_name: null # It set, to load previously saved analysis.
 group_file_name: null
 rewrite_file_name: null

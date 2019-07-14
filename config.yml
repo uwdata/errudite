@@ -1,5 +1,5 @@
 task: qa # the task, should be "qa" and "vqa".
-cache_path: ~/datasets/caches/dataset_debug/mrqa-dev/ # the cached folder.
+cache_path: ~/caches/mrqa-dev # the cached folder.
 model_metas: # a model.
 - name: mrqa_path
   model_class: mrqa # an implemented model class
