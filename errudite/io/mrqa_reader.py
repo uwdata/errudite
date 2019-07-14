@@ -129,16 +129,18 @@ class MRQAReader(DatasetReader):
         answers = []
         for an_raw in ans_raw:
             # include not only the text, but also the position
-            an_norm = '{0}-{1}'.format(normalize_text(an_raw['text']), an_raw['char_spans'][0])
-            if an_norm in answer_hash:
-                continue
-            answer_hash.append(an_norm)
-            answer = QAAnswer(
-                model='groundtruth', 
-                qid=question.qid,
-                text=an_raw['text'], vid=0, metas=question.metas)
-            answer.add_attributes(context=context, \
-                predicted=None, groundtruths=None, char_start=an_raw['char_spans'][0][0], \
-                span_start=None)
-            answers.append(answer)
+            for idxes in an_raw['char_spans']:
+                answer_start = idxes[0]
+                an_norm = '{0}-{1}'.format(normalize_text(an_raw['text']), answer_start)
+                if an_norm in answer_hash:
+                    continue
+                answer_hash.append(an_norm)
+                answer = QAAnswer(
+                    model='groundtruth', 
+                    qid=question.qid,
+                    text=an_raw['text'], vid=0, metas=question.metas)
+                answer.add_attributes(context=context, \
+                    predicted=None, groundtruths=None, char_start=answer_start, \
+                    span_start=None)
+                answers.append(answer)
         return answers
