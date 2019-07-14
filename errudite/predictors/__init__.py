@@ -8,6 +8,10 @@ try:
     from .qa.predictor_bidaf import PredictorBiDAF
 except:
     pass
+try:
+    from .qa.predictor_mrqa_bert import PredictorBertMRQA
+except:
+    pass
 
 try:
     from .nli.predictor_decompose_att import PredictorDecomposeAtt

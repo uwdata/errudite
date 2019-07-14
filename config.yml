@@ -1,12 +1,12 @@
 task: qa # the task, should be "qa" and "vqa".
 cache_path: ~/datasets/caches/error_analysis/squad-100/ # the cached folder.
 model_metas: # a model.
-- name: bidaf
-  model_class: bidaf # an implemented model class
-  model_path: # a local model file path
+- name: mrqa_bert
+  model_class: mrqa # an implemented model class
+  model_path: 
   # an online path to an Allennlp model
-  model_online_path: https://s3-us-west-2.amazonaws.com/allennlp/models/bidaf-model-2017.09.15-charpad.tar.gz
-  description: Pretrained model from Allennlp, for the BiDAF model (QA)
+  model_online_path: https://s3.us-east-2.amazonaws.com/mrqa/models/BERT/_MIX_6.tar.gz
+  description: Pretrained BERT baseline model from MRQA website.
 attr_file_name: null # It set, to load previously saved analysis.
 group_file_name: null
 rewrite_file_name: null

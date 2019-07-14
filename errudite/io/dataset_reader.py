@@ -117,9 +117,11 @@ class DatasetReader(Registrable):
         spacy_annotator_quick.model.max_length = 100000000
         logger.info("Computing vocab frequency from file at: %s", file_path)
         def _count_str_freq(str_arr: List[str]) -> Dict[str, int]:
-            total_doc = spacy_annotator_quick.process_text(' \n '.join(str_arr))
-            total = [token.lemma_ for token in total_doc if not (token.is_punct or token.text == '\n')]
-            token_count = Counter(total)
+            token_count = Counter()
+            for str_ in tqdm(str_arr):
+                total_doc = spacy_annotator_quick.process_text(str_)
+                total = [token.lemma_ for token in total_doc if not (token.is_punct or token.text == '\n')]
+                token_count += Counter(total)
             return token_count
         target_dicts = self._read(file_path, lazy=True, sample_size=None)
         for key, val in target_dicts.items():
