@@ -2,7 +2,7 @@ import os
 import sys
 sys.path.append('..')
 sys.path.append('../..')
-sys.path.append(os.path.abspath(os.path.expanduser('~/Desktop/sourcetree/errudite/')))
+sys.path.append(os.path.abspath(os.path.expanduser('~/sourcetree/errudite/')))
 from tqdm import tqdm
 import pandas as pd
 
