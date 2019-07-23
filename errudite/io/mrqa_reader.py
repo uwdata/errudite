@@ -47,13 +47,15 @@ class MRQAReader(DatasetReader):
                 'num_of_questions':0, 'inst_remainder':[], \
                 'dataset_weight':1 })
             datasets[ind]['header'] = json.loads(datasets[ind]['file_handle'].readline())['header']
+            is_in_domain = "in_domain" in single_file_path
+            datasets[ind]['header']["domain"] = "in" if is_in_domain else "out"
         instances = []
         questions, answers = [], []        
         is_done = [False for _ in datasets]
         while not all(is_done):
             for ind, dataset in enumerate(datasets):
                 dataset_header = dataset["header"]
-                logger.info(f"Reading from dataset: {dataset_header['dataset']}.")
+                logger.info(f"Reading from dataset: {dataset_header['dataset']} ({dataset_header['domain']}).")
                 if is_done[ind]:
                     continue
                 for cidx, example in tqdm(enumerate(dataset['file_handle'])):
@@ -66,15 +68,16 @@ class MRQAReader(DatasetReader):
                     if lazy:
                         context = p_raw['context']
                     else:
-                        context = Context(aid="0", cid=cid, text=p_raw['context'], vid=0, 
-                            qid=None, metas={"dataset": dataset_header["dataset"]})
+                        context = Context(
+                            aid="0", cid=cid, text=p_raw['context'], vid=0, qid=None, 
+                            metas={"dataset": dataset_header["dataset"], "domain": dataset_header['domain']})
                     # for each question
                     for q_raw in p_raw['qas']:
                         if lazy:
                             questions.append(q_raw['question'])
                             answers += q_raw['answers']
                         else:
-                            instance = self._text_to_instance(dataset["header"], q_raw['qid'], q_raw, context)
+                            instance = self._text_to_instance(dataset_header, q_raw['qid'], q_raw, context)
                             if instance is not None:
                                 dataset['num_of_questions'] += 1
                                 instances.append(instance)
@@ -98,7 +101,9 @@ class MRQAReader(DatasetReader):
     def _text_to_instance(self, dataset_header: dict, qid: str, q_raw, context: Context) -> Instance:  # type: ignore
         if not q_raw['detected_answers']:
             return None
-        question = Question(qid=qid, text=q_raw['question'], vid=0, metas={"dataset": dataset_header["dataset"]})
+        question = Question(
+            qid=qid, text=q_raw['question'], vid=0, 
+            metas={"dataset": dataset_header["dataset"], "domain": dataset_header['domain']})
         # load the groundtruth
         answers = self._load_groundtruths(
             ans_raw=q_raw['detected_answers'], 
