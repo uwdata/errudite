@@ -44,7 +44,7 @@ class PredictorBertMRQA(PredictorQA, PredictorAllennlp, Predictor):
         try:
             json_obj = {
                 "context": ptext,
-                "context_tokens": [ [t.text,t.idx] for t in self.spacy_annotator.process_text(ptext) ],
+                "context_tokens": [ [t.text,t.idx] for t in self.spacy_annotator.process_text(ptext) if t.text != "\n" ],
                 "qas": [{
                     "qid": "tmp",
                     "answers": [],
@@ -52,7 +52,7 @@ class PredictorBertMRQA(PredictorQA, PredictorAllennlp, Predictor):
                         { "text": "tmp", "char_spans": [[0, 3]], "token_spans": [[0, 1]]}
                     ],
                     "question": qtext,
-                    "question_tokens": [ [t.text,t.idx] for t in self.spacy_annotator.process_text(qtext) ],
+                    "question_tokens": [ [t.text,t.idx] for t in self.spacy_annotator.process_text(qtext) if t.text != "\n" ],
                 }],
             }
             predicted = self.predictor.predict_json(json_obj)
@@ -63,7 +63,7 @@ class PredictorBertMRQA(PredictorQA, PredictorAllennlp, Predictor):
                     'confidence': predicted["best_span_logit"], #np.log2(predicted["best_span_logit"]),
                     'text': predicted["best_span_str"], #predicted['best_span_str'],
                     # 5 chars for [SEP], 1 + 1 chars for spaces
-                    'char_start': predicted['char_offsets'][0] - len(qtext) - 7
+                    'char_start': predicted['char_offsets'][0]#- len(qtext) - 7
                 }
             else:
                 return None

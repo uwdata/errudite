@@ -1,9 +1,8 @@
 task: qa # the task, should be "qa" and "vqa".
-cache_path: ~/caches/mrqa-dev # the cached folder.
+cache_path: ~/datasets/caches/dataset_debug/mrqa-dev/ # the cached folder.
 model_metas: # a model.
 - name: mrqa_path
   model_class: mrqa # an implemented model class
-  model_path: 
   # an online path to an Allennlp model
   model_online_path: https://s3.us-east-2.amazonaws.com/mrqa/models/BERT/_MIX_6.tar.gz
   description: Pretrained BERT baseline model from MRQA website.

@@ -121,8 +121,12 @@ class MRQAReader(DatasetReader):
                 inst['text'] = qa['question'] + ' [SEP] ' + unproc_context['context'][context_char_offset: \
                             context_char_offset + curr_context_tokens[-1][1] + len(curr_context_tokens[-1][0]) + 1]
                 inst['answers'] = []
-                qa_metadata = {'has_answer': False, 'dataset': header['dataset'], "question_id": qa['qid'], \
-                               'answer_texts_list': list(set(qa['answers']))}
+                qa_metadata = {
+                    'context_char_offset': context_char_offset,
+                    'has_answer': False, 
+                    'dataset': header['dataset'], 
+                    "question_id": qa['qid'], 
+                    'answer_texts_list': list(set(qa['answers']))}
                 for answer in qa['detected_answers']:
                     if answer['token_spans'][0][0] >= window_start_token_offset and \
                         answer['token_spans'][0][1] < window_end_token_offset:

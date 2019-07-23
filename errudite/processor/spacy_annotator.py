@@ -13,6 +13,7 @@ try:
     from spacy.cli.download import download as spacy_download
     from spacy import util
     from spacy.tokens import Doc, Token
+    from spacy.symbols import ORTH, LEMMA, POS, TAG
     try:
         spacy_version = int(spacy.__version__[0])
     except:
@@ -47,7 +48,16 @@ class SpacyAnnotator(object):
         disable: List[str]=[], 
         use_whitespace: bool=False,
         lang: str='en_core_web_sm'): # en_coref_sm
+        def _build_special_case_rule(string):
+            return [{ORTH: string, LEMMA: string, POS: u"X"}]
+
         self.model = SpacyAnnotator.load_lang_model(lang, disable=disable)
+        # special cases 
+        self.model.tokenizer.add_special_case(u"[TLE]", _build_special_case_rule("[TLE]"))
+        self.model.tokenizer.add_special_case(u"[DOC]", _build_special_case_rule("[DOC]"))
+        self.model.tokenizer.add_special_case(u"[PAR]", _build_special_case_rule("[PAR]"))
+        self.model.tokenizer.add_special_case(u"</P>", _build_special_case_rule("</P>"))
+        self.model.tokenizer.add_special_case(u"<P>", _build_special_case_rule("<P>"))
         self.load()
         if use_whitespace:
             self.model.tokenizer = WhitespaceTokenizer(self.model.vocab)

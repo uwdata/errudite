@@ -60,7 +60,6 @@ class BERT_QA(Model):
                 metadata: List[Dict[str, Any]] = None) -> Dict[str, torch.Tensor]:
 
         batch_size, num_of_passage_tokens = passage['bert'].size()
-
         # BERT for QA is a fully connected linear layer on top of BERT producing 2 vectors of
         # start and end spans.
         embedded_passage = self._text_field_embedder(passage)
@@ -125,10 +124,12 @@ class BERT_QA(Model):
             best_span_logit = np.max(span_start_logits_numpy[question_inds, best_span_cpu[question_inds][:, 0]] +
                                       span_end_logits_numpy[question_inds, best_span_cpu[question_inds][:, 1]])
 
-            passage_str = question_instances_metadata[best_span_ind]['original_passage']
+            passage_str = question_instances_metadata[best_span_ind]['original_passage']            
+            passage_offset = question_instances_metadata[best_span_ind]['context_char_offset']
             offsets = question_instances_metadata[best_span_ind]['token_offsets']
+            n_q = offsets[len(question_instances_metadata[best_span_ind]['question_tokens'])-1][1]
             predicted_span = best_span_cpu[question_inds[best_span_ind]]
-            start_offset = offsets[predicted_span[0]][0]
+            start_offset =  offsets[predicted_span[0]][0]
             end_offset = offsets[predicted_span[1]][1]
             best_span_string = passage_str[start_offset:end_offset]
             # Note: this is a hack, because AllenNLP, when predicting, expects a value for each instance.
@@ -136,7 +137,9 @@ class BERT_QA(Model):
             for i in range(len(question_inds)):
                 output_dict['best_span_str'].append(best_span_string)
                 output_dict['best_span_logit'].append(float(best_span_logit))
-                output_dict['char_offsets'].append([int(start_offset), int(end_offset)])
+                output_dict['char_offsets'].append([
+                    int(start_offset + passage_offset - 7 - n_q), 
+                    int(end_offset + passage_offset - 7 - n_q)])
                 output_dict['qid'].append(question_instances_metadata[best_span_ind]['question_id'])
 
             f1_score = 0.0

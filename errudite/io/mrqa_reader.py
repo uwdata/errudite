@@ -58,6 +58,8 @@ class MRQAReader(DatasetReader):
                     continue
                 for cidx, example in tqdm(enumerate(dataset['file_handle'])):
                     p_raw = json.loads(example)
+                    if p_raw["context"].startswith("[[Hrothgar]]"):
+                        print(p_raw)
                     cid = f'{dataset_header["dataset"]}_{cidx}'
                     if not p_raw['context']:
                         continue
