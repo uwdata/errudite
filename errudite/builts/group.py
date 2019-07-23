@@ -459,7 +459,10 @@ class Group(BuiltBlock):
         Group
             The re-created group.
         """
-        return Group(raw['name'], raw['description'], raw['cmd'])
+        return Group(
+            raw['name'] if "name" in raw else None, 
+            raw['description'] if "description" in raw else None, 
+            raw['cmd'] if "cmd" in raw else None)
 
     @staticmethod 
     def create(

@@ -118,10 +118,10 @@ class Predictor(Registrable):
         """
         try:
             return Predictor.by_name(raw["model_class"])(
-                name=raw["name"], 
-                description=raw["description"],
-                model_path=raw["model_path"],
-                model_online_path=raw["model_online_path"])
+                name=raw["name"] if "name" in raw else None, 
+                description=raw["description"] if "description" in raw else None,
+                model_path=raw["model_path"] if "model_path" in raw else None,
+                model_online_path=raw["model_online_path"] if "model_online_path" in raw else None)
         except:
             raise
     
