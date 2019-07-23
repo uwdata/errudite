@@ -4,6 +4,7 @@ import numpy as np
 from allennlp.models.archival import load_archive
 from allennlp.predictors.predictor import Predictor as AllenPredictor
 from .predictor import Predictor
+import torch
 
 # bidaf-model-2017.08.31.tar.gz
 # bidaf-model-2017.09.15-charpad.tar.gz
@@ -37,10 +38,16 @@ class PredictorAllennlp(Predictor):
         """
         model = None
         if model_path:
-            archive = load_archive(model_path)
+            if torch.cuda.is_available():
+                archive = load_archive(model_path, cuda_device=0)
+            else:    
+                archive = load_archive(model_path)
             model = AllenPredictor.from_archive(archive, model_type)
         elif model_online_path:
-            model = AllenPredictor.from_path(model_online_path, model_type)
+            if torch.cuda.is_available():
+	            model = AllenPredictor.from_path(model_online_path, model_type, cuda_device=0)
+	        else:
+	            model = AllenPredictor.from_path(model_online_path, model_type)
         self.predictor = model
         Predictor.__init__(self, name, description, model, ['accuracy'])
 

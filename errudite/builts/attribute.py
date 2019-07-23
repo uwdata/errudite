@@ -492,7 +492,10 @@ class Attribute(BuiltBlock):
         Attribute
             The re-created attribute.
         """
-        return Attribute(raw['name'], raw['description'], raw['cmd'])
+        return Attribute(
+            raw['name'] if "name" in raw else None, 
+            raw['description'] if "description" in raw else None, 
+            raw['cmd'] if "cmd" in raw else None)
 
     @staticmethod 
     def create(
