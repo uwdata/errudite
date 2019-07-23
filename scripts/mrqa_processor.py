@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
     reader = DatasetReader.by_name("mrqa")(
         cache_folder_path=f"~/datasets/caches/dataset_debug/mrqa-{sample_name}")
-    instances = reader.read(file_path, sample_size=sample_size)
+    instances = reader.read(file_paths, sample_size=sample_size)
 
     predictor = Predictor.by_name("mrqa")(
         name="mrqa_path", 
