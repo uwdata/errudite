@@ -37,17 +37,13 @@ class PredictorAllennlp(Predictor):
         None
         """
         model = None
+        model_path = model_path or model_online_path
         if model_path:
             if torch.cuda.is_available():
                 archive = load_archive(model_path, cuda_device=0)
             else:    
                 archive = load_archive(model_path)
             model = AllenPredictor.from_archive(archive, model_type)
-        elif model_online_path:
-            if torch.cuda.is_available():
-	            model = AllenPredictor.from_path(model_online_path, model_type, cuda_device=0)
-	        else:
-	            model = AllenPredictor.from_path(model_online_path, model_type)
         self.predictor = model
         Predictor.__init__(self, name, description, model, ['accuracy'])
 

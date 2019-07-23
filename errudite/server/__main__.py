@@ -55,7 +55,7 @@ def get_args():
 args = get_args()
 try:
     with open(args.config_file) as f:
-        configs = yaml.load(f)
+        configs = yaml.safe_load(f)
     logger.info(configs)
     # construct the API
     API_CONSTRUCTOR =  API.by_name(configs["task"])
