@@ -16,6 +16,5 @@ class MRQAPredictor(AllenPredictor):
             for instance in self._dataset_reader.gen_question_instances(question_chunks):
                 question_instances.append(instance)
             predictions.append(self.predict_batch_instance(question_instances)[0])
-            print(self.predict_batch_instance(question_instances))
         formated_predictions = {pred['qid']:pred for pred in predictions}
         return formated_predictions
