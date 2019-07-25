@@ -43,7 +43,7 @@ def dep_distance(
     float
         The distance.
     """
-    out_ = None
+    out_ = 1000
     try:
         global CUR_SAVED_RULE
         if pattern:

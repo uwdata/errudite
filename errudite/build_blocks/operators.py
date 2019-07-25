@@ -243,14 +243,15 @@ class BinOp(LogicOp):
                         value=operands[0].value not in operands[1].value)
                 operands = [OpNodeReturn(key=op.key, value=f'"{op.value}"') \
                     if type(op.value) == str else op for op in operands]
-                """
-                for idx, op in enumerate(operands):
-                    if op == None or not isinstance(op, OpNodeReturn) or eval(f'{op.value}') == None:
-                        # print(f'{self.operands[idx]} is None!!')
-                        return DEFAULT_RETURN
-                """
-                return OpNodeReturn(key=key,
-                    value=eval(f'{operands[0].value} {self.operator} {operands[1].value}'))
+                #for idx, op in enumerate(operands):
+                #    if op == None or not isinstance(op, OpNodeReturn) or eval(f'{op.value}') == None:
+                #        # print(f'{self.operands[idx]} is None!!')
+                #        return DEFAULT_RETURN
+                try:
+                    return OpNodeReturn(key=key,
+                        value=eval(f'{operands[0].value} {self.operator} {operands[1].value}'))
+                except:
+                    return OpNodeReturn(key=key, value=False)
         except:
             raise
 

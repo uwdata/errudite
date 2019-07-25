@@ -35,6 +35,8 @@ def overlap(
         Either the ratio, or the actual overlapping token list.
     """
     try:
+        if not doc_a and not doc_b:
+            return 0
         sents_a = convert_list(convert_doc(doc_a))
         sents_b = convert_list(convert_doc(doc_b))
         def overlap_(sent_a, sent_b):

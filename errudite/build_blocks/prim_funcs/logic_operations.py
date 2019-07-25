@@ -90,7 +90,7 @@ def count(vars: List[Any]) -> int:
     int
         The counted number.
     """
-    output = None
+    output = 0
     try:
         if not vars:
             output = 0

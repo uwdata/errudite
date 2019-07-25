@@ -18,7 +18,7 @@ from ..prim_func import PrimFunc
 def token_pattern(
     docs: Union[Doc, Span, 'Target', List],
     pattern: Union[str, List[str]]) -> bool:
-    output = None
+    output = []
     try:
         global CUR_SAVED_RULE
         if not pattern: # special case: just return everything
@@ -64,7 +64,7 @@ def token_idxes(
     docs: Union[Doc, Span, 'Target', List],
     idxes: Union[int, List[int]]=None) -> Union[Doc, Span, Token]: 
     # TODO: decide if we want the token to be involved?
-    output = None
+    output = []
     try:
         if type(idxes) == float:
             idxes = int(idxes)
@@ -141,7 +141,7 @@ def token(
     Union[Span, Token]
         The queried sub-list.
     """
-    output = None
+    output = []
     try:
         if not docs:
             raise DSLValueError("No input to [ token ].")

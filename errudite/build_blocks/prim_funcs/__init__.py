@@ -1,5 +1,5 @@
-#from .dep_distance import *
-#from .logic_operations import *
+from .dep_distance import *
+from .logic_operations import *
 from .freq import *
 from .length import *
 from .offset import *

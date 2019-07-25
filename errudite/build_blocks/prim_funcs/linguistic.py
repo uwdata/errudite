@@ -26,7 +26,7 @@ def STRING(target: Union['Target', Span]) -> str:
     str
         The string.
     """
-    output = None
+    output = ""
     try:
         if not target:
             raise DSLValueError(f"No valid input to [ STRING ]. target: {target}")
@@ -63,7 +63,7 @@ def LABEL(target: 'Label') -> str:
     str
         The string.
     """
-    output = None
+    output = ""
     try:
         if not target:
             raise DSLValueError(f"No valid input to [ LABEL ]. target: {target}")
@@ -123,7 +123,7 @@ def linguistic(
         The linguistic feature, or feature list if (1) multiple spans are given, and 
         (2) `get_root` and `get_most_common` are both false.
     """    
-    output = None
+    output = ""
     try:
         NOT_INCLUDE_POS = ['ADP', 'IN', 'RP', 'RB', 'DET', 'CONJ', 'PUNCT', 'CCONJ', 'PART', 'SCONJ', 'SYM']
         def linguistic_ent_(span):
