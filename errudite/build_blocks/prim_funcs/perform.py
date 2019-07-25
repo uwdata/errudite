@@ -35,7 +35,7 @@ def perform(model: str, predictions: Union['Label', List['Label']], perform_name
     float
         The queried metric.
     """
-    output = None
+    output = 0
     try:
         model = Instance.resolve_default_model(model)
         if not model:

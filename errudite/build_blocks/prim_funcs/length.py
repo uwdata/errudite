@@ -25,13 +25,13 @@ def length(
     int
         The length.
     """
-    output = None
+    output = 0
     try:
         def length_(doc):
             return len(convert_doc(doc)) if doc else 0
         if docs is None:
             raise DSLValueError(f"No valid input to [ length ]. input: {docs}")
-        elif type(docs) == list:
+        elif type(docs) == list and len(docs) > 0:
             output = min([ length_(doc) for doc in docs ]) # convert_token
         else:
             output = length_(docs) # convert_token

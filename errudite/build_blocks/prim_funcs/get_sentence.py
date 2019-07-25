@@ -9,20 +9,6 @@ import logging
 logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
 from ..prim_func import PrimFunc
 
-"""Get the sentence given an answer.
-    
-    Arguments:
-        answer {Union[List['Answer'], 'Answer']} -- 
-            Can be either one answer or a answer list
-        context {[type]} -- the context.
-    
-    Keyword Arguments:
-        shift {int} -- a list of shift idxes (default: {0})
-    
-    Returns:
-        Union[Span, List[Span]] -- returned sentence or sentence span
-    """
-
 @PrimFunc.register()
 def sentence(
     answer: 'QAAnswer', context: 'Context', 
