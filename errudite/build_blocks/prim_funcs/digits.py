@@ -148,7 +148,9 @@ def truncate(
     """
     output = None
     try:
-        if value is None or not is_digit(min_value):
+        if value is None:
+            return None
+        elif not is_digit(min_value):
             raise DSLValueError(f"Invalid value input to [ truncate ]: {value} ({type(value)}).")
         elif not is_digit(min_value) or not is_digit(max_value):
             raise DSLValueError(f"Invalid range input to [ truncate ]: {min_value} ({type(min_value)}), {max_value} ({type(max_value)}).")

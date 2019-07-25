@@ -303,6 +303,7 @@ class Attribute(BuiltBlock):
         """
         instance_hash = instance_hash or Instance.instance_hash
         instance_hash_rewritten = instance_hash_rewritten or Instance.instance_hash_rewritten
+        model = Instance.resolve_default_model(model)
         data = self.serialize(
             instance_hash, instance_hash_rewritten, filtered_instances, model)
         is_discrete = self.dtype == "categorical"

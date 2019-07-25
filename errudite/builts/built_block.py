@@ -164,6 +164,8 @@ class BuiltBlock(Store):
             If any version exists, return the key of that version.
             Otherwise, return ``None``.
         """
+        if not instance_hash:
+            return None
         for i in instance_group.values():
             if i.key() in instance_hash:
                 return i.key()
