@@ -307,12 +307,21 @@ class Attribute(BuiltBlock):
         data = self.serialize(
             instance_hash, instance_hash_rewritten, filtered_instances, model)
         is_discrete = self.dtype == "categorical"
+        sorted_list = None
+        if is_discrete:
+            sorted_dict = defaultdict(int)
+            for correctness in data["counts"]:
+                for value, count in data["counts"][correctness]:
+                    sorted_dict[value] += count
+            sorted_list = sorted(list(sorted_dict), key=lambda x: sorted_dict[x], reverse=True)
         dtype = 'Q' if not is_discrete else 'N'
         bin = alt.Bin(maxbins=10, extent=data["domain"]) if not is_discrete else None
         compute_domain = []
         stack = "normalize" if normalize else "zero"
         for correctness in data["counts"]:
             for value, count in data["counts"][correctness]:
+                if sorted_list and sorted_list.index(value) >= 15:
+                    continue
                 compute_domain.append({self.name: value, "count": count, "correctness": correctness})
         df = pd.DataFrame(compute_domain)
         chart = alt.Chart(df).mark_bar().encode(
