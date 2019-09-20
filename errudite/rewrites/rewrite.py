@@ -402,6 +402,80 @@ class Rewrite(Registrable, Store):
             tooltip=['model:N', 'count:Q', 'correctness:N']
         ).properties(width=100)#.configure_facet(spacing=5)#
         return chart
+    
+
+    def visualize_delta_confidence_per_model(self, 
+        instance_hash: Dict[InstanceKey, Instance]={},
+        instance_hash_rewritten: Dict[InstanceKey, Instance]={},
+        filtered_instances: List[InstanceKey]=None,
+        model: str=None):
+        """
+        Visualize the rewrite distribution, in terms of model confidence. 
+        It's a histogram that shows the distribution of the delta confidence.
+        This historgram is different
+        for each different model. 
+        
+        Parameters
+        ----------
+        instance_hash : Dict[InstanceKey, Instance]
+            A dict that saves all the *original* instances, by default {}. 
+            It denotes by the corresponding instance keys.
+            If ``{}``, resolve to ``Instance.instance_hash``.
+        instance_hash_rewritten : Dict[InstanceKey, Instance]
+            A dict that saves all the *rewritten* instances, by default {}. 
+            It denotes by the corresponding instance keys.
+            If ``{}``, resolve to ``Instance.instance_hash_rewritten``.
+        filtered_instances : List[InstanceKey], optional
+            A selected list of instances. If given, only display the distribution
+            of the selected instances, by default None
+        model : str, optional
+            The selected model, by default ``None``. 
+            If ``None``, resolve to ``Instance.model``.
+        
+        Returns
+        -------
+        alt.Chart
+            An altair chart object. 
+        """
+        model = Instance.resolve_default_model(model)
+        instance_hash = instance_hash or Instance.instance_hash
+        instance_hash_rewritten = instance_hash_rewritten or Instance.instance_hash_rewritten
+        output = []
+        if filtered_instances:
+            qids = list(np.unique([i.qid for i in filtered_instances]))
+        else:
+            qids = None
+        data = Rewrite.get_delta_performance(self,
+            qids, instance_hash, instance_hash_rewritten, model)['delta_confidences']
+        output = [ {"delta_confidence": d} for d in data ] 
+        df = pd.DataFrame(output)
+        chart = alt.Chart(df).mark_bar().encode(
+            y=alt.Y('count()'),
+            x=alt.X('delta_confidence:Q', bin=True)
+        ).properties(width=150, height=100, title=f'{self.rid} on {model}')#.configure_facet(spacing=5)#
+        return chart
+    
+    def visualize_delta_confidence_models(self, 
+        instance_hash: Dict[InstanceKey, Instance]={},
+        instance_hash_rewritten: Dict[InstanceKey, Instance]={},
+        filtered_instances: List[InstanceKey]=None,
+        models: str=[]):
+        """
+        Visualize the delta confidence distribution for ALL the ``models``. 
+        This function calls ``self.visualize_delta_confidence_per_model`` and concate the 
+        charts returned for each model.
+        """
+        model = models or [ Instance.model ]
+        if not models:
+            models = [ Instance.resolve_default_model(None) ]
+        output = []
+        charts = [ self.visualize_delta_confidence_per_model(
+            instance_hash=instance_hash,
+            instance_hash_rewritten=instance_hash_rewritten,
+            model=model,
+            filtered_instances=filtered_instances,
+        ) for model in models ]
+        return alt.vconcat(*charts).resolve_scale(x="shared", y="shared", color="shared")
 
     def __repr__(self) -> str:
         """
@@ -493,7 +567,7 @@ class Rewrite(Registrable, Store):
         """
         instance_hash = instance_hash or Instance.instance_hash
         instance_hash_rewritten = instance_hash_rewritten or Instance.instance_hash_rewritten
-        delta_f1s, prediction_changed = [], 0
+        delta_f1s, delta_confidences, prediction_changed = [], [], 0
         if qids != None:
             instance_keys = { key: True for key in rewrite.instance_keys if key.qid in qids }
             #list(filter(lambda k: k.qid in qids, self.instance_keys))
@@ -508,11 +582,16 @@ class Rewrite(Registrable, Store):
                     int (instance_hash_rewritten[key].get_perform(model) == 1) - 
                     int (instance_hash[ori_key].get_perform(model) == 1)
                 )
+                delta_confidences.append(
+                    float (instance_hash_rewritten[key].get_perform(model, 'confidence')) - 
+                    float (instance_hash[ori_key].get_perform(model, 'confidence'))
+                )
                 p0 = instance_hash[ori_key].get_entry('prediction', model)
                 p1 = instance_hash_rewritten[key].get_entry('prediction', model)
                 if p0 and p1 and p0.label != p1.label:
                     prediction_changed += 1
         return {
+            'delta_confidences': delta_confidences,
             'delta_f1s': delta_f1s,
             'prediction_changed': prediction_changed,
             'total_size': TOTAL_SIZE,
