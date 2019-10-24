@@ -96,6 +96,7 @@ Then, we need to start the server:
 
 ```sh
 # the model relies on Allennlp, so make sure you install that first.
+# If you run into issues installing it, please refer to Allennlp's official page: https://github.com/allenai/allennlp
 pip install allennlp==0.9.0
 source venv/bin/activate
 python -m errudite.server --config_file config.yml
