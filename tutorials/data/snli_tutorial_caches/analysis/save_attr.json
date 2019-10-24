@@ -3,5 +3,15 @@
         "cmd": "delta_length(premise, hypothesis)",
         "name": "delta_len_premise_hypo",
         "description": "The length delta between the premise and the hypothesis"
+    },
+    {
+        "cmd": "LABEL(groundtruth)",
+        "name": "label",
+        "description": "The labels of the instances."
+    },
+    {
+        "cmd": "overlap(premise, hypothesis)",
+        "name": "overlap_between",
+        "description": "The text overlap between premise and hypothesis."
     }
 ]

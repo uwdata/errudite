@@ -1,11 +1,19 @@
 [
     {
-        "rid": "CARDINAL NOUN VERB -> one NOUN VERB",
+        "rid": "ADJ -> not ADJ",
         "category": "auto",
-        "from_cmd": "CARDINAL NOUN VERB",
-        "to_cmd": "one NOUN VERB",
+        "from_cmd": "ADJ",
+        "to_cmd": "not ADJ",
         "description": "Change one pattern to another.",
-        "target_cmd": "premise",
+        "target_cmd": "hypothesis",
         "class": "ReplacePattern"
+    },
+    {
+        "rid": "add_you_know_what",
+        "category": "auto",
+        "description": "Customized rewrite function",
+        "target_cmd": "premise",
+        "rewrite_func": "def add_you_know_what(instance):\n    return \"You know what? \" + instance.premise.doc.text\n",
+        "class": "RewriteCustomFunc"
     }
 ]
