@@ -567,4 +567,4 @@ def delete_selected_rules(rids: List[str], api: API=api):
     finally:
         return wrap_output(output, msg)
 
-app.run(debug=True)
+app.run(debug=False)
