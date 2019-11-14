@@ -135,7 +135,10 @@ class Rewrite(Registrable, Store):
 
     def _set_main_target(self, cmd: str, instance: 'Instance'=None):
         if instance:
-            for target in ['groundtruth', 'prediction'] + instance.entries:
+            if 'sentence' in cmd:
+                self.target = 'context'
+            else:
+                for target in ['groundtruth', 'prediction'] + instance.entries:
                     if target in cmd:
                         self.target = target
                         break
