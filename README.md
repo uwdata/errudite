@@ -18,7 +18,7 @@ and perform counterfactual analysis across all available validation data.
 
 ## Citation
 If you are interested in this work, please see our 
-[ACL 2019 research paper](https://homes.cs.washington.edu/~wtshuang/files/acl2019_errudite.pdf)
+[ACL 2019 research paper](https://homes.cs.washington.edu/~wtshuang/static/papers/2019-acl-errudite.pdf)
 and consider citing our work:
 ```
 @inproceedings{2019-errudite,
@@ -26,7 +26,7 @@ and consider citing our work:
     author = {Wu, Tongshuang and Ribeiro, Marco Tulio and Heer, Jeffrey and Weld Daniel S.},
   booktitle={the 57th Annual Meeting of the Association for Computational Linguistics (ACL 2019)},
     year = {2019},
-    url = {https://homes.cs.washington.edu/~wtshuang/files/acl2019_errudite.pdf},
+    url = {https://www.aclweb.org/anthology/P19-1073.pdf},
 }
 ```
 
