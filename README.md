@@ -10,11 +10,12 @@ and perform counterfactual analysis across all available validation data.
 
 ## Getting Started
 
-1. Watch [this video demo](https://youtu.be/Dil5i0AYyu8) that contains the highlights of Errudite's functions & use cases 
-2. Get [set up](#installation) quickly
-3. Try [Errudite's user interface](#gui-server) on machine comprehension
-4. Try the [tutorials on JupyterLab notebooks](#jupyterLab-tutorial)
-5. Read the [documentation](https://errudite.readthedocs.io/en/latest/)
+1. Read [our blog post](https://medium.com/@uwdata/errudite-55d5fbf3232e) which explains the core idea of Errudite.
+2. Watch [this video demo](https://youtu.be/Dil5i0AYyu8) that contains the highlights of Errudite's functions & use cases 
+3. Get [set up](#installation) quickly
+4. Try [Errudite's user interface](#gui-server) on machine comprehension
+5. Try the [tutorials on JupyterLab notebooks](#jupyterLab-tutorial)
+6. Read the [documentation](https://errudite.readthedocs.io/en/latest/)
 
 ## Citation
 If you are interested in this work, please see our 
@@ -77,6 +78,12 @@ support such as visualizing data distributions, suggesting potential queries, an
 grouping and rewriting results. While not strictly necessary, it makes their application much 
 more straightforward.
 
+Note that the GUI is meant to be released as-is -- _We do not expect it to be extended to other tasks._ 
+As such, the frontend code is not as well-documented as the backend code. 
+**If you are interested in using Errudite for your own task, please consider using [Errudite package in JupyterLab](#jupyterLab-tutorial)**.
+It wraps almost all the Errudite functions (except for query auto-complete and programming-by-demonstration), 
+and allows you to customize for your own task.
+
 To get a taste of GUI for the machine comprehension task, you should first download a cache folder 
 for preprocessed [SQuAD](https://rajpurkar.github.io/SQuAD-explorer/) instances, which will help you
 skip the process of running your own preprocessing. Say we want to use the preprocessed SQuAD dataset,
@@ -125,7 +132,7 @@ rewrite_file_name: null
 Then visit `http://localhost:5000/` in your web browser.
 
 
-### JupyterLab Tutorial
+### JupyterLab Tutorial (and task extension)
 
 Besides used in a GUI, errudite also serves as a general python package. The tutorial goes
 through:
