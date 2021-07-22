@@ -1,6 +1,5 @@
 # Errudite
 
-**This opensourcing is work-in-progress!**
 
 Errudite is an interactive tool for scalable, reproducible, and counterfactual error analysis. 
 Errudite provides an expressive domain-specific language for extracting relevant features of
